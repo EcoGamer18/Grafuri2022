@@ -1,0 +1,3 @@
+Curs 01 - Introducere, https://youtu.be/ysMoVLZo8xE
+Curs 02 - Reprezentarea unui graf, parcurgerea unui graf, https://youtu.be/gNFv-twRP28
+Curs 03 - parcurgeri, drumuri de cost minim in grafuri orientate si ponderate, https://youtu.be/VoBOJ_FbvOw
