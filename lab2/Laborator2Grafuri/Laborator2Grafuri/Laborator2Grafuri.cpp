@@ -18,6 +18,10 @@ labirint_cuvinte.txt.
 Pentru labirintul 1 si 2 punctul de pornire este indicat de litera S și punctul de oprire este indicat de litera F, 
 spre deosebire de labirintul 1 și 2, labirintul 3 nu are o soluție unică.
 
+https://www.pbinfo.ro/articole/18589/algoritmul-lui-lee
+
+
+
 4. Pentru un graf dat să se afișeze pe ecran vârfurile descoperite de algoritmul BFS și distanța față de vârful sursă (arborele descoperit).
 
 5. Pentru un graf dat să se afișeze pe ecran vârfurile descoperite de apelul recursiv al procedurii DFS_VISIT(G, u) (apadurea descoperită de DFS).
