@@ -26,5 +26,14 @@
     <Text Include="input2.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="labirint_1.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="labirint_2.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="labirint_cuvinte.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

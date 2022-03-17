@@ -26,10 +26,11 @@ spre deosebire de labirintul 1 și 2, labirintul 3 nu are o soluție unică.
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <list>
 #define INF 100000
 using namespace std;
 ifstream f1;
-ifstream f2;
 
 
 void citire_lista_muchii_to_matrice_adiacenta_neorientat(int a[101][101], int n, std::ifstream& f) {
@@ -83,7 +84,7 @@ void print_consola_matrice(int a[101][101], int n, int m) {
     }
 }
 
-void citire_lista_muchii_to_matrice_incidenta(int a[1001][101], int n, int& muchie)
+void citire_lista_muchii_to_matrice_incidenta(int a[1001][101], int n, int& muchie,std::ifstream& f)
 {
     for (int i = 1; i <= n; i++)
     {
@@ -95,7 +96,7 @@ void citire_lista_muchii_to_matrice_incidenta(int a[1001][101], int n, int& much
 
     int aux, bux;
     muchie = 1;
-    while (f2 >> aux >> bux)
+    while (f >> aux >> bux)
     {
         a[bux][muchie] = a[aux][muchie] = 1;
         muchie++;
@@ -167,6 +168,61 @@ void matricea_inchiderii_tranzitive(int a[101][101], int n, int t[101][101]) {
                     t[i][j] = t[i][k] * t[k][j];
 }
 
+void BFS_arbore(int a[101][101], int n, int vf[101], int dist[101],int sursa) {
+    for (int i = 1; i <= n; i++) {
+        dist[i] = (i == sursa) ? 0 : INF;
+    }
+    *vf = {};
+    vf[1] = sursa;
+    int top = 2, curent = 1;
+    while (curent < top) {
+        int k = vf[curent++];
+        for (int i = 1; i <= n; ++i)
+            if (a[k][i] == 1 && dist[i] == INF) {
+                dist[i] = dist[k] + 1;
+                vf[top++] = i;
+            }
+    }
+}
+
+void print_arbore_BFS(int vf[101], int dist[101], int n) {
+    int distCurent = 0;
+    cout << "Distanta " << distCurent << " fata de radacina :";
+    for (int i = 1; i <= n; i++){
+        if (distCurent != dist[vf[i]]) {
+            distCurent++;
+            cout << "\nDistanta " << distCurent << " fata de radacina : ";
+        }
+        cout << vf[i] << " ";
+    }
+}
+
+void DFS_arbore(int a[101][101], int n, int vf[101], int sursa, int distCurrent = 0) {
+    vf[sursa] = distCurrent;
+    for (int i = 1; i <= n; i++) {
+        if (a[sursa][i] == 1 && vf[i] == INF)
+        {
+            DFS_arbore(a, n, vf, i,distCurrent+1);
+        }
+    }
+}
+
+void print_arbore_DFS(int vf[101], int n) {
+    int distCurent = 0, ok = 0;
+    print_vector(vf, n);
+    do {
+        ok = 0;
+        cout << "\nDistanta " << distCurent << " fata de radacina : ";
+        for (int i = 1; i <= n; i++) {
+            if (distCurent == vf[i]) {
+                ok = 1;
+                cout << i << " ";
+            }
+        }
+        distCurent++;
+    } while (ok != 0);
+}
+
 int main()
 {
     int a[101][101];
@@ -183,20 +239,46 @@ int main()
     
     cout << "\n>>Exercitiul 2\n";
     int t[101][101];
-    f2.open("input2.txt");
-    f2 >> n;
-    citire_lista_muchii_to_matrice_adiacenta_orientat(a, n, f2);
+    f1.open("input2.txt");
+    f1 >> n;
+    citire_lista_muchii_to_matrice_adiacenta_orientat(a, n, f1);
     cout << "Matricea de adiacenta:\n";
     print_consola_matrice(a, n, n);
     matricea_inchiderii_tranzitive(a, n, t);
     cout << "Matricea inchiderii tranzitiva este:\n";
     print_consola_matrice(t, n, n);
-    f2.close();
-    f2.clear();
+    f1.close();
+    f1.clear();
 
     cout << "\n>>Exercitiul 3\n";
+    cout << "Formatarea acelor fisiere txt ma face sa vreau sa ma sinucid de un arbore.\n";
 
+    cout << "\n>>Exercitiul 4\n";
+    f1.open("input1.txt");
+    f1 >> n;
+    citire_lista_muchii_to_matrice_adiacenta_neorientat(a, n, f1);
+    cout << "Varful sursa: ";
+    int v,dist[101],vf[101];
+    cin >> v;
+    BFS_arbore(a, n, vf, dist, v);
+    cout << "Arbore:\n";
+    print_arbore_BFS(vf, dist, n);
+    f1.close();
+    f1.clear();
 
+    cout << "\n>>Exercitiul 5\n";
+    f1.open("input1.txt");
+    f1 >> n;
+    citire_lista_muchii_to_matrice_adiacenta_neorientat(a, n, f1);
+    cout << "Varful sursa: ";
+    cin >> v;
+    for (int i = 1; i <= n; i++)
+        vf[i] = INF;
+    DFS_arbore(a, n, vf, v);
+    cout << "Arbore:\n";
+    print_arbore_DFS(vf, n);
+    f1.close();
+    f1.clear();
 
     return 0;
 }

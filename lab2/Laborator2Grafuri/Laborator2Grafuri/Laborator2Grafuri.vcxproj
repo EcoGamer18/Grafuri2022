@@ -144,6 +144,9 @@
   <ItemGroup>
     <Text Include="input1.txt" />
     <Text Include="input2.txt" />
+    <Text Include="labirint_1.txt" />
+    <Text Include="labirint_2.txt" />
+    <Text Include="labirint_cuvinte.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
