@@ -237,7 +237,7 @@ int main()
 	cout << ">>Exercitiul 1\n";
 	f1.open("input1.txt");
 	f1 >> n;
-	citire_lista_muchii_to_matrice_adiacenta_neorientat(a, n, f1);
+	citire_lista_muchii_to_matrice_adiacenta_orientat(a, n, f1);
 	int v, u;
 	cout << "Varful sursa:\n";
 	cin >> u;
