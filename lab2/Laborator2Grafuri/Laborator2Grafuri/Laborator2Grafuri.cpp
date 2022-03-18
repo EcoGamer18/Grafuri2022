@@ -259,9 +259,6 @@ int main()
     f1.close();
     f1.clear();
 
-    cout << "\n>>Exercitiul 3\n";
-    cout << "Formatarea acelor fisiere txt ma face sa vreau sa ma sinucid de un arbore.\n";
-
     cout << "\n>>Exercitiul 4\n";
     f1.open("input1.txt");
     f1 >> n;
