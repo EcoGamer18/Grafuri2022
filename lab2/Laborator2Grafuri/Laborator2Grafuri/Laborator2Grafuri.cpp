@@ -143,16 +143,19 @@ void algoritmul_moore_matrice_adiacenta_print_drum(int a[101][101], int n, int s
 	int k = l[destinatia], pu = destinatia;
 	cout << "Vectorul de distante este:\n";
 	print_vector(l, n);
+	int drum[101] = {}, ndrum = 0;
 	if (k != INF)
 	{
-		cout << "Drumul este:\n";
-		cout << destinatia << "-";
-		while (k > 1) {
+		drum[++ndrum] = destinatia;
+		while (k > 0) {
 			pu = p[pu];
 			k--;
-			cout << pu << "-";
+			drum[++ndrum] = pu;
 		}
-		cout << sursa;
+		cout << "Drumul este:\n";
+		for (int i = ndrum; i >= 1; i--) {
+			cout << drum[i] << " ";
+		}
 	}
 	else
 	{
@@ -176,7 +179,6 @@ int BFS_arbore(int a[101][101], int n, int vf[101], int dist[101], int sursa) {
 	for (int i = 1; i <= n; i++) {
 		dist[i] = (i == sursa) ? 0 : INF;
 	}
-	*vf = {};
 	vf[1] = sursa;
 	int top = 2, curent = 1;
 	while (curent < top) {
@@ -193,7 +195,9 @@ int BFS_arbore(int a[101][101], int n, int vf[101], int dist[101], int sursa) {
 
 void print_arbore_BFS(int vf[101], int dist[101], int n) {
 	int distCurent = 0;
-	cout << "Distanta " << distCurent << " fata de radacina :";
+	cout << "Vector varfuri dupa bfs:\n";
+	print_vector(vf, n);
+	cout << "\nDistanta " << distCurent << " fata de radacina :";
 	for (int i = 1; i <= n; i++) {
 		if (distCurent != dist[vf[i]]) {
 			distCurent++;
@@ -215,6 +219,7 @@ void DFS_arbore(int a[101][101], int n, int vf[101], int sursa, int distCurrent 
 
 void print_arbore_DFS(int vf[101], int n) {
 	int distCurent = 0, ok = 0;
+	cout << "Vector varfuri dupa bfs:\n";
 	print_vector(vf, n);
 	do {
 		ok = 0;
@@ -250,7 +255,7 @@ int main()
 
 	cout << "\n>>Exercitiul 2\n";
 	int t[101][101];
-	f1.open("input2.txt");
+	f1.open("input1.txt");
 	f1 >> n;
 	citire_lista_muchii_to_matrice_adiacenta_orientat(a, n, f1);
 	cout << "Matricea de adiacenta:\n";
@@ -264,7 +269,7 @@ int main()
 	cout << "\n>>Exercitiul 4\n";
 	f1.open("input1.txt");
 	f1 >> n;
-	citire_lista_muchii_to_matrice_adiacenta_neorientat(a, n, f1);
+	citire_lista_muchii_to_matrice_adiacenta_orientat(a, n, f1);
 	cout << "Varful sursa: ";
 	int dist[101], vf[101];
 	cin >> v;
@@ -277,7 +282,7 @@ int main()
 	cout << "\n>>Exercitiul 5\n";
 	f1.open("input1.txt");
 	f1 >> n;
-	citire_lista_muchii_to_matrice_adiacenta_neorientat(a, n, f1);
+	citire_lista_muchii_to_matrice_adiacenta_orientat(a, n, f1);
 	cout << "Varful sursa: ";
 	cin >> v;
 	for (int i = 1; i <= n; i++)
