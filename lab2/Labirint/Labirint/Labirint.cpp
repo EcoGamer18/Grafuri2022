@@ -175,7 +175,6 @@ int main() {
 
 	//display_matrix(matrix);
 
-
 	shortestPath(matrix, HEIGHT - 1, WIDTH - 1, graphEnds);
 
 

@@ -172,7 +172,7 @@ void matricea_inchiderii_tranzitive(int a[101][101], int n, int t[101][101]) {
 					t[i][j] = t[i][k] * t[k][j];
 }
 
-void BFS_arbore(int a[101][101], int n, int vf[101], int dist[101], int sursa) {
+int BFS_arbore(int a[101][101], int n, int vf[101], int dist[101], int sursa) {
 	for (int i = 1; i <= n; i++) {
 		dist[i] = (i == sursa) ? 0 : INF;
 	}
@@ -187,6 +187,8 @@ void BFS_arbore(int a[101][101], int n, int vf[101], int dist[101], int sursa) {
 				vf[top++] = i;
 			}
 	}
+	
+	return top;
 }
 
 void print_arbore_BFS(int vf[101], int dist[101], int n) {
@@ -266,9 +268,9 @@ int main()
 	cout << "Varful sursa: ";
 	int dist[101], vf[101];
 	cin >> v;
-	BFS_arbore(a, n, vf, dist, v);
+	int top = BFS_arbore(a, n, vf, dist, v);
 	cout << "Arbore:\n";
-	print_arbore_BFS(vf, dist, n);
+	print_arbore_BFS(vf, dist, top - 1);
 	f1.close();
 	f1.clear();
 
