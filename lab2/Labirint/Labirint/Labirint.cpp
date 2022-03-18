@@ -28,7 +28,7 @@ endsC parseText(int matrix_output[HEIGHT][WIDTH], const char* filename) {
     int i = 0;
 
     while (getline(file, line)) {
-        for (int j = 0; j < 41; j++) {
+        for (int j = 0; j < WIDTH-1; j++) {
             matrix_output[i][j] = 0;
             switch (line[j]) {
             case 'S': {
