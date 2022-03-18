@@ -236,7 +236,12 @@ int main()
     f1.open("input1.txt");
     f1 >> n;
     citire_lista_muchii_to_matrice_adiacenta_neorientat(a, n, f1);
-    algoritmul_moore_matrice_adiacenta_print_drum(a, n, 2, 5);
+    int v,u;
+    cout << "Varful sursa:\n";
+    cin >> u;
+    cout << "Varful destinatie:\n";
+    cin >> v;
+    algoritmul_moore_matrice_adiacenta_print_drum(a, n, u, v);
     f1.close();
     f1.clear();
 
@@ -262,7 +267,7 @@ int main()
     f1 >> n;
     citire_lista_muchii_to_matrice_adiacenta_neorientat(a, n, f1);
     cout << "Varful sursa: ";
-    int v,dist[101],vf[101];
+    int dist[101],vf[101];
     cin >> v;
     BFS_arbore(a, n, vf, dist, v);
     cout << "Arbore:\n";
