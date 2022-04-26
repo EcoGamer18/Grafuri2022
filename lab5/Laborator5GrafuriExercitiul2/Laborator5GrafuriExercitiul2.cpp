@@ -38,8 +38,10 @@ Curs 8
 https://www.geeksforgeeks.org/push-relabel-algorithm-set-1-introduction-and-illustration/
 https://www.geeksforgeeks.org/push-relabel-algorithm-set-2-implementation/
 https://cp-algorithms.com/graph/push-relabel.html
+https://cp-algorithms.com/graph/push-relabel-faster.html
 
 https://www.geeksforgeeks.org/relabel-to-front-algorithm/
+http://www.euroinformatica.ro/documentation/programming/!!!Algorithms_CORMEN!!!/DDU0165.html
 
 */
 
@@ -179,7 +181,7 @@ void test_cases(const char* name_of_file_in, const char* name_of_file_out) {
     }
 
     int result_push_relabel = max_flow_push_relabel(a, n, 0, n - 1);
-    int result_edmond = 0;
+    int result_relabel_to_front = 0;
     int expected_result;
 
     fout >> expected_result;
@@ -188,17 +190,17 @@ void test_cases(const char* name_of_file_in, const char* name_of_file_out) {
     fout.close();
 
     if (result_push_relabel != expected_result) {
-        cout << name_of_file_in << " pica la push-relabel\n\tresult_ford: " << result_push_relabel << "\n\tresult_expected: " << expected_result << "\n";
+        cout << name_of_file_in << " pica la push-relabel\n\tresult_push_relabel: " << result_push_relabel << "\n\tresult_expected: " << expected_result << "\n";
     }
     else {
         cout << name_of_file_in << " trece push-relabel\n";
     }
 
-    if (result_edmond != expected_result) {
-        cout << name_of_file_in << " pica la edmond\n\tresult_edmond: " << result_edmond << "\n\tresult_expected: " << expected_result << "\n";;
+    if (result_relabel_to_front != expected_result) {
+        cout << name_of_file_in << " pica la relabel-to-front\n\tresult_edmond: " << result_relabel_to_front << "\n\tresult_expected: " << expected_result << "\n";;
     }
     else {
-        cout << name_of_file_in << " trece edmond\n";
+        cout << name_of_file_in << " trece relabel-to-front\n";
     }
 
     cout << "Testing done for " << name_of_file_in << "\n";
