@@ -45,11 +45,67 @@ http://www.euroinformatica.ro/documentation/programming/!!!Algorithms_CORMEN!!!/
 
 */
 
+/*
+INITIALIZARE_PREFLUX(G,s,t)
+1: \\ iniţializare f (u, v) și h(u, v), ∀u, v ∈ V
+2: for fiecare v ∈ V do
+3:      v.h = 0
+4:      v.e = 0
+5: for fiecare (u, v) ∈ E do
+6:      (u,v).f=0
+7:      s.h = |V|
+8: for fiecare v ∈ s.Adj do
+9:      (s, v).f = c(s, v)
+10:     v.e = c(s, v)
+11:     s.e = s.e − c(s, v)
+
+
+POMPARE_PREFLUX(G,s,t)
+1: INITIALIZARE_PREFLUX(G,s,t)
+2: while TRUE do
+3:      if ∃u /∈ {s, t} ∧ u.e > 0 ∧ cf (u, v) > 0 ∧ u.h = v.h + 1 then
+4:          POMPARE(u,v)
+5:          continue
+6:      if ∃u /∈ {s, t} ∧ u.e > 0 ∧ [u.h ≤ v.h|∀v ∈ V, (u, v) ∈ Ef ] then
+7:          INALTARE(u)
+8:          continue
+9:      break
+
+
+POMPARE_TOPOLOGICA(G,s,t)
+1:      INITIALIZARE_PREFLUX(G,s,t)
+2:      L = V \ {s, t}
+3:      for fiecare u ∈ V \ {s, t} do
+4:          u.curent = u.N.head
+5:          u = L.head
+6:      while u 6 = N IL do
+7:          înalţime_veche = u.h
+8:          DESCARCARE(u)
+9:          if u.h > înalţime_veche then
+10:             muta u în capul listei L
+11:         u.next
+
+
+DESCARCARE(u)
+1: while u.e > 0 do
+2:      v = u.curent
+3:      if v == N IL then
+4:          INALTARE(u)
+5:          u.curent = u.N.head
+6:      else if cf (u, v) > 0 ∧ u.h == v.h + 1 then
+7:          POMPARE(u,v)
+8:      else
+9:          u.curent = u.urmatorul_vecin
+*/
+
+
 #include <iostream>
 #include <fstream>
 using namespace std;
 
+
 #define INF 1000000
+
 
 void delete_first(int* v, int& n) {
     n++;
@@ -58,6 +114,7 @@ void delete_first(int* v, int& n) {
     }
     n -= 2;
 }
+
 
 void push(int** capacity, int** flow, int* excess, int n, int* excess_vertices, int& top, int u, int v) {
     int d = min(excess[u], capacity[u][v] - flow[u][v]);
@@ -70,6 +127,7 @@ void push(int** capacity, int** flow, int* excess, int n, int* excess_vertices, 
     }
 }
 
+
 void relabel(int** capacity, int** flow, int* height, int n, int u) {
     int d = INF;
     for (int i = 0; i < n; i++) {
@@ -81,6 +139,7 @@ void relabel(int** capacity, int** flow, int* height, int n, int u) {
         height[u] = d + 1;
     }
 }
+
 
 void discharge(int** capacity, int** flow, int* height, int* seen, int* excess, int n, int* excess_vertices, int& top, int u) {
     while (excess[u] > 0) {
@@ -97,6 +156,7 @@ void discharge(int** capacity, int** flow, int* height, int* seen, int* excess, 
         }
     }
 }
+
 
 int max_flow_push_relabel(int** capacity, int n, int s, int d) {
     int* height = (int*)malloc(sizeof(int) * n);
@@ -151,6 +211,47 @@ int max_flow_push_relabel(int** capacity, int n, int s, int d) {
         max_flow += flow[i][d];
     return max_flow;
 }
+
+/*
+INITIALIZE-PREFLOW(G, s)
+ 1  for each vertex u ∈ V[G]
+ 2       do h[u] ← 0
+ 3          e[u] ← 0
+ 4  for each edge (u, v) ∈ E[G]
+ 5       do f[u, v] ← 0
+ 6          f[v, u] ← 0
+ 7  h[s] ← |V[G]|
+ 8  for each vertex u ∈ Adj[s]
+ 9       do f[s, u] ← c(s, u)
+10          f[u, s] ← -c(s,  u)
+11          e[u] ← c(s, u)
+12          e[s] ← e[s] - c(s, u)
+
+DISCHARGE(u)
+1  while e[u] > 0
+2      do v ← current[u]
+3          if v = NIL
+4             then RELABEL(u)
+5                  current[u] ← head[N[u]]
+6          elseif cf(u, v) > 0 and h[u] = h[v] + 1
+7            then PUSH(u, v)
+8          else current[u] ← next-neighbor[v]
+
+
+RELABEL-TO-FRONT(G, s, t)
+ 1  INITIALIZE-PREFLOW(G, s)
+ 2  L ← V[G] - {s, t}, in any order
+ 3  for each vertex u ∈ V[G] - {s, t}
+ 4      do current[u] ← head[N[u]]
+ 5  u ← head[L]
+ 6  while u ≠ NIL
+ 7     do old-height ← h[u]
+ 8        DISCHARGE(u)
+ 9        if h[u] > old-height
+10           then move u to the front of list L
+11        u ← next[u]
+*/
+
 
 
 void test_cases(const char* name_of_file_in, const char* name_of_file_out) {
