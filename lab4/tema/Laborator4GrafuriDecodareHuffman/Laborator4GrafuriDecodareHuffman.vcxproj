@@ -141,6 +141,18 @@
   <ItemGroup>
     <ClCompile Include="Laborator4GrafuriDecodareHuffman.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="1-in.txt" />
+    <Text Include="1-out.txt" />
+    <Text Include="2-in.txt" />
+    <Text Include="2-out.txt" />
+    <Text Include="3-in.txt" />
+    <Text Include="3-out.txt" />
+    <Text Include="4-in.txt" />
+    <Text Include="4-out.txt" />
+    <Text Include="5-in.txt" />
+    <Text Include="5-out.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
